@@ -1,7 +1,7 @@
 namespace: cert-manager
 
 resources:
-- https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml
+- https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.yaml
 - lets-encrypt.yaml
 
 patchesJSON6902:
