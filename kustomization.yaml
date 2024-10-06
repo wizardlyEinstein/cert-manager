@@ -4,21 +4,22 @@ resources:
 - https://github.com/cert-manager/cert-manager/releases/download/v1.16.0/cert-manager.yaml
 - lets-encrypt.yaml
 
-patchesJSON6902:
-- target:
-    version: v1
-    kind: Deployment 
-    name: cert-manager 
-  patch: |-
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+patches:
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/args/2
       value: --leader-election-namespace=cert-manager
-- target:
+  target:
+    kind: Deployment
+    name: cert-manager
     version: v1
-    kind: Deployment 
-    name: cert-manager-cainjector 
-  patch: |-
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/args/1
       value: --leader-election-namespace=cert-manager
-
+  target:
+    kind: Deployment
+    name: cert-manager-cainjector
+    version: v1
